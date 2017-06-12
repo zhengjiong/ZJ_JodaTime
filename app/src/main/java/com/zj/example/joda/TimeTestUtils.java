@@ -1,7 +1,13 @@
 package com.zj.example.joda;
 
 import org.joda.time.DateTime;
+import org.joda.time.Days;
+import org.joda.time.Hours;
+import org.joda.time.Interval;
 import org.joda.time.LocalDate;
+import org.joda.time.Minutes;
+import org.joda.time.Period;
+import org.joda.time.Seconds;
 
 /**
  * Created by zhengjiong on 16/5/5.
@@ -9,6 +15,23 @@ import org.joda.time.LocalDate;
 public class TimeTestUtils {
     public static String FORMAT_DATE = "YYYY-MM-dd";
     public static String FORMAT_DATETIME = "YYYY-MM-dd HH:mm:ss";
+
+    public static void test10(long start, long end) {
+        Interval interval = new Interval(start, end);
+        Period p = interval.toPeriod();
+        System.out.println("时间相差："+p.getDays()+" 天 " + p.getHours()+ " 小时 "+p.getMinutes()+" 分钟"+p.getSeconds()+" 秒");
+    }
+
+    public static void test9(long start, long end){
+        DateTime dt1 = new DateTime(start);
+        DateTime dt2 = new DateTime(end);
+        System.out.print("时间相差：");
+        System.out.print(Days.daysBetween(dt1, dt2).getDays() + " 天 ");
+        System.out.print(Hours.hoursBetween(dt1, dt2).getHours() % 24 + " 小时 ");
+        System.out.print(Minutes.minutesBetween(dt1, dt2).getMinutes() % 60 + " 分钟 ");
+        System.out.print(Seconds.secondsBetween(dt1, dt2).getSeconds() % 60+ " 秒.");
+        System.out.println();
+    }
 
     /**
      * 8.获取某年的第几月的开始日期
